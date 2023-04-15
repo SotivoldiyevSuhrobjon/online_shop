@@ -1,6 +1,9 @@
 from django.shortcuts import render,HttpResponse
-
+from store.models import Product
 
 def home_page(request):
-    # return HttpResponse(request, 'Hello django')
-    return render(request, 'home.html')
+    products = Product.objects.filter(is_available=True)
+    context = {
+        "products": products
+    }
+    return render(request, 'home.html', context)
